@@ -1,11 +1,9 @@
 FwsLogger
 ============
 
-Docs now available [online](https://www.freedomwebservices.net/zend-framework/freedom-logger).
+Docs available [online](https://www.freedomwebservices.net/zend-framework/fws-refresh-redirect).
 
-ZF2 Debugging and Logging Module
-
-This module can send debugging information from your code to either a temporary file, email or permanent error log.
+I was inspired to write this simple module after using ZF flashMessanger controller plugin and view helper. The problem I found is when using the view helper the messages in flashMessanger are deleted, this means that if the user refreshes the page all messages are gone. This can possibly lead to errors depending on your code. To overcome this issue I wrote the refresh redirect module, this simply checks if the same page is called a second time, if so redirect to a different page.
 
 Installation
 ------------
@@ -14,7 +12,7 @@ Installation
 
 #### By cloning project
 
-1. Install the [FwsLogger](https://github.com/krytenuk/logger) ZF2 module
+1. Install the [FwsRefreshRedirect](https://github.com/krytenuk/refreshRedirect) ZF2 module
    by cloning it into `./vendor/`.
 2. Clone this project into your `./vendor/` directory.
 
@@ -24,11 +22,11 @@ Installation
 
     ```json
     "require": {
-        "krytenuk/logger": "1.*"
+        "krytenuk/refreshRedirect": "1.0.*"
     }
     ```
 
-2. Now tell composer to download FwsLogger by running the command:
+2. Now tell composer to download FwsRefreshRedirect by running the command:
 
     ```bash
     $ php composer.phar update
@@ -36,65 +34,44 @@ Installation
 
 #### Post installation
 
-1. Enabling it in your `application.config.php` file.
+Enabling it in your `application.config.php` file.
 
     ```php
     <?php
     return array(
         'modules' => array(
             // ...
-            'FwsLogger',
+            'FwsRefreshRedirect',
         ),
         // ...
     );
     ```
 
-2. Copy `./vendor/krytenuk/logger/config/fwslogger.local.php.dist` to `./config/autoload/fwslogger.local.php`.
-
-3. In `./config/autoload/fwslogger.local.php` change the following.
-	'emailLogger'
-	'to' => the email address to receive log reports
-	'from' => the email address of the server, shows as sender of email.  If unsure use the same email address as 'to'.
-	'subject' => the subject line of the email (optional).
-
-	'infoLogger'
-	'file' => the log-file and path of the info logger.  Default to 'logs/variable_event.log' relative to the root folder of your ZF2 application
-
-	'errorLogger'
-	'file' => the log-file and path of the error logger.  Default to 'logs/error.log' relative to the root folder of your ZF2 application
-
-4. Create the folder(s) for the log files.  As mentioned above by default this is a folder called 'logs' in the root of your application.
-
 ### Usage
 
-There are three separate logging classes that can log to either a temporary file '\FwsLogger\InfoLogger', a permanent log file '\FwsLogger\ErrorLogger' or to an email '\FwsLogger\EmailLogger'.
-As these all use static functions they can be used anywhere in your application.  As these loggers don't use php STDOUT nothing is rendered to the browser, ideal for debugging live websites.
+Refresh Redirect is a controller plugin, when added to your controller actions, a page refresh will redirect to the specified route or url.
 
-1. Logging to a temporary file.
-	'\FwsLogger\InfoLogger' logs to a temporary file, by default this is 'variable_event.log' (see post installation above).  This is possibly the most common logger used during development.
-	This temporary file is overwritten each call to your ZF2 application, Each call to '\FwsLogger\InfoLogger' during this is added to the log file.
+## Redirect to route
 
-	Usage:
-	'\FwsLogger\InfoLogger::vardump($variable);' - Performs a php var_dump to the log file.
-	'\FwsLogger\InfoLogger::printr($variable);' - Performs a php print_r to the log file.
-	'\FwsLogger\InfoLogger::write($variable);' - Sends a simple message or variable to the log file.
+To redirect to a route use:
 
-2. Logging to a permanent file.
-	'\FwsLogger\ErrorLogger' like '\FwsLogger\InfoLogger' logs to a file, however this file is permanent and is not overwritten.  By default this is 'error.log' (see post installation above).
+    ```php
+     <?php
+        $route = 'your/route';
+        $params = array(); // your route params (optional)
+        $options = array(); // your route options (optional)
+        $reuseMatchedParams = FALSE; // reuse matched parameters (optional)
+        $this->refreshRedirect($route, $params, $options, $reuseMatchedParams);
+        // or use
+        $this->refreshRedirect->toRoute($route, $params, $options, $reuseMatchedParams);
 
-	Usage:
-	'\FwsLogger\ErrorLogger::vardump($variable);' - Performs a php var_dump to the log file.
-	'\FwsLogger\ErrorLogger::printr($variable);' - Performs a php print_r to the log file.
-	'\FwsLogger\ErrorLogger::write($variable);' - Sends a simple message or variable to the log file.
+## Redirect to url
 
-	Note:
-	At present the size of this file is not monitored and needs to be periodically checked as it can get large.
+To redirect to a url use:
 
-3. Logging to email.
-	'\FwsLogger\EmailLogger' as it's name suggests sends log info in an email.
-	Currently uses php sendmail.
+    ```php
+    <?php
+       $url = 'http://www.yourdomain.com';
+       $this->refreshRedirect->toUrl($url);
 
-	Usage:
-	'\FwsLogger\EmailLogger::vardump($variable);' - Performs a php var_dump to the log email.
-	'\FwsLogger\EmailLogger::printr($variable);' - Performs a php print_r to the log email.
-	'\FwsLogger\EmailLogger::write($variable);' - Sends a simple message or variable to the log email.
+See Zend Framework [redirect plugin](https://framework.zend.com/manual/2.0/en/modules/zend.mvc.plugins.html#the-redirect-plugin) for more info on the redirect parameters.
