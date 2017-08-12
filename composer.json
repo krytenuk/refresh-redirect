@@ -1,6 +1,6 @@
 {
-    "name": "krytenuk/refreshRedirect",
-    "description": "ZF2 module for redirectingh",
+    "name": "krytenuk/refresh-redirect",
+    "description": "ZF2 module for redirecting",
     "require": {
         "php": ">=5.4.0",
         "zendframework/zend-session": "^2.3.0",
@@ -21,5 +21,5 @@
     },
     "license": "BSD-3-Clause",
     "type": "library",
-    "homepage": "https://github.com/krytenuk/refreshRedirect"
+    "homepage": "https://github.com/krytenuk/refresh-redirect"
 }

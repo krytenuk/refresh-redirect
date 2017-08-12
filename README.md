@@ -12,7 +12,7 @@ Installation
 
 #### By cloning project
 
-1. Install the [FwsRefreshRedirect](https://github.com/krytenuk/refreshRedirect) ZF2 module
+1. Install the [FwsRefreshRedirect](https://github.com/krytenuk/refresh-redirect) ZF2 module
    by cloning it into `./vendor/`.
 2. Clone this project into your `./vendor/` directory.
 
@@ -22,7 +22,7 @@ Installation
 
     ```json
     "require": {
-        "krytenuk/refreshRedirect": "1.0.*"
+        "krytenuk/refresh-redirect": "1.0.*"
     }
     ```
 
