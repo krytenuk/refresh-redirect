@@ -49,10 +49,12 @@ class Module
     public function onFinish(MvcEvent $event)
     {
         $httpRefererContainer = $event->getApplication()->getServiceManager()->get('httpRefererContainer');
-        $httpRefererContainer->controller = $event->getRouteMatch()->getParam('controller');
-        $httpRefererContainer->action = $event->getRouteMatch()->getParam('action');
-        $httpRefererContainer->routeName = $event->getRouteMatch()->getMatchedRouteName();
-        $httpRefererContainer->refererSet = TRUE;
+        if ($event->getRouteMatch()) {
+            $httpRefererContainer->controller = $event->getRouteMatch()->getParam('controller');
+            $httpRefererContainer->action = $event->getRouteMatch()->getParam('action');
+            $httpRefererContainer->routeName = $event->getRouteMatch()->getMatchedRouteName();
+            $httpRefererContainer->refererSet = TRUE;
+        }
     }
 
 }

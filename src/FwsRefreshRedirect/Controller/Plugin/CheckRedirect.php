@@ -4,7 +4,6 @@ namespace FwsRefreshRedirect\Controller\Plugin;
 
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\Session\Container;
-use FwsRefreshRedirect\Exception\ConfigKeyNotFoundException;
 
 /**
  * CheckRedirect
