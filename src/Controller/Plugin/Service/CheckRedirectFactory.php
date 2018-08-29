@@ -2,9 +2,8 @@
 
 namespace FwsRefreshRedirect\Controller\Plugin\Service;
 
-use Zend\ServiceManager\FactoryInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use FwsRefreshRedirect\Controller\Plugin\CheckRedirect;
 
 /**
@@ -27,13 +26,4 @@ class CheckRedirectFactory implements FactoryInterface
         return new CheckRedirect($container->get('httpRefererContainer'));
     }
 
-    /**
-     * ZF2 compatability
-     * @param ServiceLocatorInterface $container
-     * @return CheckRedirect
-     */
-    public function createService(ServiceLocatorInterface $container)
-    {
-        return $this($container->getServiceLocator(), CheckRedirect::class);
-    }
 }
