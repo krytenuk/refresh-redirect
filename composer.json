@@ -13,7 +13,7 @@
             "email": "info@freedomwebservices.net",
             "homepage": "https://www.freedomwebservices.net/"
         }],
-    "keywords": ["zf2", "redirect", "refresh", "freedom"],
+    "keywords": ["zend framework", "redirect", "refresh", "freedom"],
     "autoload": {
         "psr-4": {
             "FwsRefreshRedirect\\": "src/"
