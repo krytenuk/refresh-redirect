@@ -21,5 +21,10 @@
     },
     "license": "BSD-3-Clause",
     "type": "library",
-    "homepage": "https://github.com/krytenuk/refresh-redirect"
+    "homepage": "https://github.com/krytenuk/refresh-redirect",
+    "extra": {
+        "zf": {
+            "module": "FwsRefreshRedirect"
+        }
+    }
 }
