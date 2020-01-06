@@ -2,8 +2,8 @@
 
 namespace FwsRefreshRedirect\Controller\Plugin;
 
-use Zend\Mvc\Controller\Plugin\AbstractPlugin;
-use Zend\Session\Container;
+use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
+use Laminas\Session\Container;
 
 /**
  * CheckRedirect
@@ -38,7 +38,7 @@ class CheckRedirect extends AbstractPlugin
      * @param array $params Parameters to use in url generation, if any
      * @param array $options RouteInterface-specific options to use in url generation, if any
      * @param bool $reuseMatchedParams Whether to reuse matched parameters
-     * @return \Zend\Http\Response
+     * @return \Laminas\Http\Response
      */
     public function __invoke($route = NULL, Array $params = array(), Array $options = array(), $reuseMatchedParams = FALSE)
     {
@@ -54,7 +54,7 @@ class CheckRedirect extends AbstractPlugin
      * @param array $params Parameters to use in url generation, if any
      * @param array $options RouteInterface-specific options to use in url generation, if any
      * @param type $reuseMatchedParams Whether to reuse matched parameters
-     * @return \Zend\Http\Response
+     * @return \Laminas\Http\Response
      */
     public function toRoute($route, Array $params = array(), Array $options = array(), $reuseMatchedParams = FALSE)
     {
@@ -68,7 +68,7 @@ class CheckRedirect extends AbstractPlugin
     /**
      *
      * @param string $url
-     * @return \Zend\Http\Response
+     * @return \Laminas\Http\Response
      */
     public function toUrl($url)
     {

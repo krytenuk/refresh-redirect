@@ -2,9 +2,9 @@
 
 namespace FwsRefreshRedirect\Service;
 
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
-use Zend\Session\Container;
+use Laminas\Session\Container;
 
 /**
  * Description of HttpRefererContainerFactory

@@ -2,7 +2,7 @@
 
 namespace FwsRefreshRedirect\Controller\Plugin\Service;
 
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
 use FwsRefreshRedirect\Controller\Plugin\CheckRedirect;
 
