@@ -1,6 +1,6 @@
 {
     "name": "krytenuk/refresh-redirect",
-    "description": "Zend Framework module for redirecting",
+    "description": "Laminas module for redirecting",
     "require": {
         "php": "^7.0 || ^8.0",
         "laminas/laminas-session": "^2.8",
