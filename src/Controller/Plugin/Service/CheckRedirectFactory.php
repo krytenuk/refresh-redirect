@@ -3,7 +3,7 @@
 namespace FwsRefreshRedirect\Controller\Plugin\Service;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use FwsRefreshRedirect\Controller\Plugin\CheckRedirect;
 
 /**
@@ -15,7 +15,7 @@ class CheckRedirectFactory implements FactoryInterface
 {
 
     /**
-     * ZF3 compatability
+     * Create redirect controller plugin
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param array $options

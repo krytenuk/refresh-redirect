@@ -4,6 +4,7 @@ namespace FwsRefreshRedirect\Controller\Plugin;
 
 use Laminas\Mvc\Controller\Plugin\AbstractPlugin;
 use Laminas\Session\Container;
+use Laminas\Http\Response;
 
 /**
  * CheckRedirect
@@ -38,9 +39,9 @@ class CheckRedirect extends AbstractPlugin
      * @param array $params Parameters to use in url generation, if any
      * @param array $options RouteInterface-specific options to use in url generation, if any
      * @param bool $reuseMatchedParams Whether to reuse matched parameters
-     * @return \Laminas\Http\Response
+     * @return Response|CheckRedirect
      */
-    public function __invoke($route = NULL, Array $params = array(), Array $options = array(), $reuseMatchedParams = FALSE)
+    public function __invoke($route = null, Array $params = array(), Array $options = array(), $reuseMatchedParams = false)
     {
         if (is_null($route)) {
             return $this;
@@ -54,9 +55,9 @@ class CheckRedirect extends AbstractPlugin
      * @param array $params Parameters to use in url generation, if any
      * @param array $options RouteInterface-specific options to use in url generation, if any
      * @param type $reuseMatchedParams Whether to reuse matched parameters
-     * @return \Laminas\Http\Response
+     * @return Response|void
      */
-    public function toRoute($route, Array $params = array(), Array $options = array(), $reuseMatchedParams = FALSE)
+    public function toRoute($route, Array $params = array(), Array $options = array(), $reuseMatchedParams = false)
     {
         if ($this->shouldRedirect()) {
             $response = $this->getController()->redirect()->toRoute($route, $params, $options, $reuseMatchedParams);
@@ -68,9 +69,9 @@ class CheckRedirect extends AbstractPlugin
     /**
      *
      * @param string $url
-     * @return \Laminas\Http\Response
+     * @return Response|void
      */
-    public function toUrl($url)
+    public function toUrl(string $url): Response
     {
         if ($this->shouldRedirect()) {
             $response = $this->getController()->redirect()->toUrl($url);
@@ -83,15 +84,18 @@ class CheckRedirect extends AbstractPlugin
      * Determine if redirection should take place
      * @return boolean
      */
-    private function shouldRedirect()
+    private function shouldRedirect(): bool
     {
         $controllerParams = $this->getController()->params()->fromRoute();
-        if (array_key_exists('controller', $controllerParams) && array_key_exists('action', $controllerParams) && $this->httpRefererContainer->refererSet) {
-            if ($controllerParams['controller'] == $this->httpRefererContainer->controller && $controllerParams['action'] == $this->httpRefererContainer->action) {
-                return TRUE;
-            }
+        if (array_key_exists('controller', $controllerParams) === false || array_key_exists('action', $controllerParams) === false || $this->httpRefererContainer->refererSet === false) {
+            return false;
         }
-        return FALSE;
+        
+        if ($controllerParams['controller'] == $this->httpRefererContainer->controller && $controllerParams['action'] == $this->httpRefererContainer->action) {
+            return true;
+        }
+
+        return false;
     }
 
 }

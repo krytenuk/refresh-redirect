@@ -3,7 +3,7 @@
 namespace FwsRefreshRedirect\Service;
 
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\Session\Container;
 
 /**
@@ -14,6 +14,13 @@ use Laminas\Session\Container;
 class HttpRefererContainerFactory implements FactoryInterface
 {
 
+    /**
+     * Create http referer session container
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array $options
+     * @return Container
+     */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         return new Container('httpReferer');
